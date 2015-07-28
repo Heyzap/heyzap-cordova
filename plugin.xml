@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="heyzap-cordova" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <name>Heyzap</name>
+  <description>Heyzap SDK for Apache Cordova/Adobe PhoneGap</description>
+  <author>Heyzap Inc.</author>
+  <license>Heyzap</license>
+  <keywords>cordova,device,heyzap,phonegap,sdk,ad,mobile</keywords>
+
+  <engines>
+    <engine name="cordova-android" version=">=4.0.0" />
+    <engine name="cordova-ios" version=">=3.8.0" />
+  </engines>
+  
+  <!-- Main Object -->
+  <js-module src="www/ads/HeyzapAds.js" name="ads.HeyzapAds">
+    <clobbers target="HeyzapAds" />
+  </js-module>
+  <!-- / Main Object -->
+  
+  <!-- Plugin Client Side Code -->
+  <js-module src="www/ads/InterstitialAd.js" name="ads.InterstitialAd"></js-module>
+  <js-module src="www/ads/VideoAd.js" name="ads.VideoAd"></js-module>
+  <js-module src="www/ads/IncentivizedAd.js" name="ads.IncentivizedAd"></js-module>
+  <js-module src="www/ads/BannerAd.js" name="ads.BannerAd"></js-module>
+
+  <js-module src="www/Common.js" name="Common"></js-module>
+  <js-module src="www/promise.js" name="Promise"></js-module>
+
+  <!-- Vendor -->
+  <js-module src="www/vendor/es6-promise.min.js" name="vendor.PromisePolyfill"></js-module>
+  <!-- / Vendor -->
+
+  <!-- / Plugin Client Side Code -->
+
+  <!-- iOS -->
+  <platform name="ios">
+    
+    <!-- Modify Cordova config -->
+    <config-file target="config.xml" parent="/*">
+      <feature name="HeyzapAds">
+        <param name="ios-package" value="CDVHeyzapAds"/>
+        <param name="onload" value="true" />
+      </feature>
+
+      <feature name="IncentivizedAd">
+        <param name="ios-package" value="CDVHZIncentivizedAd"/>
+        <param name="onload" value="true" />
+      </feature>
+
+      <feature name="InterstitialAd">
+        <param name="ios-package" value="CDVHZInterstitialAd"/>
+        <param name="onload" value="true" />
+      </feature>
+
+      <feature name="VideoAd">
+        <param name="ios-package" value="CDVHZVideoAd"/>
+        <param name="onload" value="true" />
+      </feature>
+
+      <feature name="BannerAd">
+        <param name="ios-package" value="CDVHZBannerAd"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+    <!-- / Modify Cordova config -->
+
+    <!-- Adapters -->
+    <header-file src="src/ios/CDVBasePlugin.h" />
+    <source-file src="src/ios/CDVBasePlugin.m" />
+
+    <header-file src="src/ios/CDVHeyzapAds.h" />
+    <source-file src="src/ios/CDVHeyzapAds.m" />
+
+    <header-file src="src/ios/CDVHZIncentivizedAd.h" />
+    <source-file src="src/ios/CDVHZIncentivizedAd.m" />
+
+    <header-file src="src/ios/CDVHZInterstitialAd.h" />
+    <source-file src="src/ios/CDVHZInterstitialAd.m" />
+
+    <header-file src="src/ios/CDVHZVideoAd.h" />
+    <source-file src="src/ios/CDVHZVideoAd.m" />
+
+    <header-file src="src/ios/CDVHZBannerAd.h" />
+    <source-file src="src/ios/CDVHZBannerAd.m" />
+    <!-- / Adapters -->
+    
+    <!-- Heyzap SDK -->
+    <framework src="src/ios/sdk/HeyzapAds.framework" custom="true" />
+    <!-- / Heyzap SDK -->
+
+    <!-- External Frameworks -->
+    <framework src="AVFoundation.framework"/>
+    <framework src="Accelerate.framework"/>
+    <framework src="AdSupport.framework"/>
+    <framework src="AudioToolbox.framework"/>
+    <framework src="CFNetwork.framework"/>
+    <framework src="CoreGraphics.framework"/>
+    <framework src="CoreMotion.framework"/>
+    <framework src="CoreLocation.framework"/>
+    <framework src="CoreMedia.framework"/>
+    <framework src="CoreTelephony.framework"/>
+    <framework src="EventKit.framework"/>
+    <framework src="EventKitUI.framework"/>
+    <framework src="MediaPlayer.framework"/>
+    <framework src="MessageUI.framework"/>
+    <framework src="MobileCoreServices.framework"/>
+    <framework src="QuartzCore.framework"/>
+    <framework src="Security.framework"/>
+    <framework src="Social.framework"/>
+    <framework src="StoreKit.framework"/>
+    <framework src="SystemConfiguration.framework"/>
+    <framework src="WebKit.framework"/>
+    <framework src="iAd.framework"/>
+
+    <framework src="libsqlite3.dylib"/>
+    <framework src="libxml2.dylib"/>
+    <framework src="libz.dylib"/>
+    <!-- / External Frameworks -->
+
+    <info>
+      You may need to enable modules in your Xcode project settings before building the app.
+      In the Xcode project explorer click on your app project, Go to the 'Build Settings' tab and change 'Enable Modules (C and Objective-C)' to 'yes'.
+
+      To add additional ad networks, simply drag and drop the SDK files/frameworks to the Xcode project.
+    </info>
+  </platform>
+  <!-- / iOS -->
+
+  <!-- Android -->
+  <platform name="android">
+    
+    <!-- Modify Cordova config -->
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="HeyzapAds">
+        <param name="android-package" value="com.heyzap.cordova.ads.CDVHeyzapAds"/>
+        <param name="onload" value="true" />
+      </feature>
+
+      <feature name="IncentivizedAd">
+        <param name="android-package" value="com.heyzap.cordova.ads.CDVIncentivizedAd"/>
+        <param name="onload" value="true" />
+      </feature>
+
+      <feature name="InterstitialAd">
+        <param name="android-package" value="com.heyzap.cordova.ads.CDVInterstitialAd"/>
+        <param name="onload" value="true" />
+      </feature>
+
+      <feature name="VideoAd">
+        <param name="android-package" value="com.heyzap.cordova.ads.CDVVideoAd"/>
+        <param name="onload" value="true" />
+      </feature>
+
+      <feature name="BannerAd">
+        <param name="android-package" value="com.heyzap.cordova.ads.CDVBannerAd"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+    <!-- / Modify Cordova config -->
+
+    <!-- Native app manifest -->
+    <config-file target="AndroidManifest.xml" parent="/*">
+
+      <!-- Required by AdMob, AppLovin, Chartboost, Facebook Audience Network, Heyzap, HyprMX, Opera Mediaworks (AdColony), UnityAds (Applifier), and Vungle -->
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+      <!-- Required by Chartboost, and Vungle -->
+      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+      <!-- Required by AdMob, AppLovin, Chartboost, Facebook Audience Network, Heyzap, HyprMX, Opera Mediaworks (AdColony), UnityAds (Applifier), and Vungle -->
+      <uses-permission android:name="android.permission.INTERNET" />
+
+      <!-- Required by AppLovin -->
+      <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+      <!-- Required by AppLovin -->
+      <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+      <!-- Required by AppLovin, Chartboost, HyprMX, Opera Mediaworks (AdColony), UnityAds (Applifier), and Vungle -->
+      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+      
+    </config-file>
+    <!-- / Native app manifest -->
+    
+    <!-- Native app manifest - Application Tag -->
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+
+      <!-- Google Play Services -->
+      <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+
+      <!-- AdMob -->
+      <activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+
+      <!-- AppLovin -->
+      <activity android:name="com.applovin.adview.AppLovinInterstitialActivity" />
+      <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
+
+      <!-- Chartboost -->
+      <activity android:name="com.chartboost.sdk.CBImpressionActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:excludeFromRecents="true" />
+
+      <!-- Facebook Audience Network -->
+      <activity android:name="com.facebook.ads.InterstitialAdActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
+
+      <!-- HyprMX -->
+      <!-- Note: It may not be necessary to add the HyprMX manifest entries if the HyprMX SDK Android project has been attached to your project as a library -->
+      <activity android:name="com.hyprmx.android.sdk.activity.HyprMXOfferViewerActivity" android:configChanges="orientation|screenSize|keyboardHidden|keyboard|smallestScreenSize|uiMode|fontScale|screenLayout|locale" android:label="HyprMX SDK" android:launchMode="singleTop" android:theme="@android:style/Theme.NoTitleBar" />
+      <activity android:name="com.hyprmx.android.sdk.activity.HyprMXRequiredInformationActivity" android:theme="@android:style/Theme.NoTitleBar" />
+      <activity android:name="com.hyprmx.android.sdk.activity.HyprMXSplashActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+      <activity android:name="com.hyprmx.android.sdk.activity.HyprMXOfferListActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+      <activity android:name="com.hyprmx.android.sdk.activity.HyprMXNoOffersActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+      <activity android:name="com.hyprmx.android.sdk.activity.HyprMXWebTrafficActivity" android:configChanges="orientation|screenSize|keyboardHidden|keyboard|smallestScreenSize|uiMode|fontScale|screenLayout|locale" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+      <service android:name="com.hyprmx.android.sdk.service.ApplicationInstallService" android:enabled="true" android:exported="false" android:stopWithTask="false" ></service>
+
+      <!-- Opera Mediaworks (AdColony) -->
+      <activity android:name="com.jirbo.adcolony.AdColonyOverlay"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+      <activity android:name="com.jirbo.adcolony.AdColonyFullscreen"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+      <activity android:name="com.jirbo.adcolony.AdColonyBrowser"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+
+      <!-- UnityAds (Applifier) -->
+      <activity android:name="com.unity3d.ads.android.view.UnityAdsFullscreenActivity"  android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:hardwareAccelerated="true" />
+
+      <!-- Vungle -->
+      <activity android:name="com.vungle.publisher.FullScreenAdActivity" android:configChanges="keyboardHidden|orientation|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+      <service android:name="com.vungle.publisher.VungleService"/>
+
+      <!-- Heyzap -->
+      <activity android:name="com.heyzap.sdk.ads.HeyzapInterstitialActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
+      <activity android:name="com.heyzap.sdk.ads.HeyzapVideoActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
+      <activity android:name="com.heyzap.sdk.ads.HeyzapProxyActivity" />
+
+      <!-- Heyzap SDK Test Activity -->
+      <activity android:name="com.heyzap.sdk.ads.MediationTestActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
+      <!-- / Heyzap SDK Test Activity -->
+      
+      <receiver android:name="com.heyzap.sdk.ads.PackageAddedReceiver">
+        <intent-filter>
+          <data android:scheme="package"/>
+          <action android:name="android.intent.action.PACKAGE_ADDED"/>
+        </intent-filter>
+      </receiver>
+      
+    </config-file>
+    <!-- / Native app manifest - Application Tag -->
+    
+    <!-- Heyzap SDK -->
+    <source-file src="src/android/sdk/heyzap-ads-sdk.jar" target-dir="libs" />
+    <!-- / Heyzap SDK -->
+
+    <framework src="com.google.android.gms:play-services:+" />
+    
+    <!-- Adapters -->
+    <source-file src="src/android/com/heyzap/cordova/ads/CDVHeyzapAbstractPlugin.java" target-dir="src/com/heyzap/cordova/ads" />
+    <source-file src="src/android/com/heyzap/cordova/ads/CDVHeyzapAds.java" target-dir="src/com/heyzap/cordova/ads" />
+    <source-file src="src/android/com/heyzap/cordova/ads/CDVIncentivizedAd.java" target-dir="src/com/heyzap/cordova/ads" />
+    <source-file src="src/android/com/heyzap/cordova/ads/CDVInterstitialAd.java" target-dir="src/com/heyzap/cordova/ads" />
+    <source-file src="src/android/com/heyzap/cordova/ads/CDVVideoAd.java" target-dir="src/com/heyzap/cordova/ads" />
+    <source-file src="src/android/com/heyzap/cordova/ads/CDVBannerAd.java" target-dir="src/com/heyzap/cordova/ads" />
+    <source-file src="src/android/com/heyzap/cordova/ads/CDVListener.java" target-dir="src/com/heyzap/cordova/ads" />
+    <source-file src="src/android/com/heyzap/cordova/ads/ICDVHeyzapPlugin.java" target-dir="src/com/heyzap/cordova/ads" />
+    <!-- / Adapters -->
+
+    <info>
+      You may need to install "Google Play Services" from the "Android Extras" section using the Android SDK manager (run "android").
+
+      To add additional ad networks, simply copy the .jar files to {ROOT}/platforms/android/libs/ folder.
+    </info>
+
+  </platform>
+  <!-- / Android -->
+
+</plugin>
