@@ -5,7 +5,7 @@
   <description>Heyzap SDK for Apache Cordova/Adobe PhoneGap</description>
   <author>Heyzap Inc.</author>
   <license>Heyzap</license>
-  <keywords>cordova,device,heyzap,phonegap,sdk,ad,mobile</keywords>
+  <keywords>cordova,heyzap,phonegap,sdk,ad,mobile,mediation</keywords>
 
   <engines>
     <engine name="cordova-android" version=">=4.0.0" />
