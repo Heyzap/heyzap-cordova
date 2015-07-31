@@ -43,6 +43,7 @@ public class CDVHeyzapAds extends CDVHeyzapAbstractPlugin {
     private static final String TAG = "CDVHeyzapAds";
 
     private HashMap<String, Integer> startOptions = new HashMap<String, Integer>();
+    private static final String FRAMEWORK = "cordova";
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -60,7 +61,8 @@ public class CDVHeyzapAds extends CDVHeyzapAbstractPlugin {
         String publisherID = args.optString(0);
         int options = getStartOptionsFromJSON(args.optJSONObject(1));
 
-            if (!publisherID.isEmpty()) {
+        if (!publisherID.isEmpty()) {
+            HeyzapAds.framework = FRAMEWORK;
             HeyzapAds.start(publisherID, cordova.getActivity(), options);
 
         } else {

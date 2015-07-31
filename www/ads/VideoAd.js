@@ -27,7 +27,7 @@
   "use strict";
 
   var SERVICE = "VideoAd";
-  var Common = cordova.require("com.heyzap.cordova.Common");
+  var Common = cordova.require("heyzap-cordova.Common");
 
   /**
    * Object responsible for handling Video Ads

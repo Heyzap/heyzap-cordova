@@ -27,7 +27,7 @@
   "use strict";
 
   var DEFAULT_CALLBACK = function(){};
-  var Promise = require('com.heyzap.cordova.Promise');
+  var Promise = require('heyzap-cordova.Promise');
 
   var Common = {
     listeners: {},

@@ -27,7 +27,7 @@
   "use strict";
 
   var SERVICE = "BannerAd";
-  var Common = cordova.require("com.heyzap.cordova.Common");
+  var Common = cordova.require("heyzap-cordova.Common");
 
   /**
    * Options for Banner ads  

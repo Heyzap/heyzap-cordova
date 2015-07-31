@@ -27,7 +27,7 @@
   "use strict";
 
   var SERVICE = "InterstitialAd";
-  var Common = cordova.require("com.heyzap.cordova.Common");
+  var Common = cordova.require("heyzap-cordova.Common");
 
   /**
    * Object responsible for handling Interstitial Ads

@@ -27,7 +27,7 @@
   "use strict";
 
   var SERVICE = "HeyzapAds";
-  var Common = cordova.require("com.heyzap.cordova.Common");
+  var Common = cordova.require("heyzap-cordova.Common");
 
   /**
    * Additional options to pass in to HeyzapAds.start
@@ -185,13 +185,13 @@
 
     Options: Options,
 
-    InterstitialAd: cordova.require('com.heyzap.cordova.ads.InterstitialAd'),
+    InterstitialAd: cordova.require('heyzap-cordova.ads.InterstitialAd'),
 
-    VideoAd: cordova.require('com.heyzap.cordova.ads.VideoAd'),
+    VideoAd: cordova.require('heyzap-cordova.ads.VideoAd'),
 
-    IncentivizedAd: cordova.require('com.heyzap.cordova.ads.IncentivizedAd'),
+    IncentivizedAd: cordova.require('heyzap-cordova.ads.IncentivizedAd'),
 
-    BannerAd: cordova.require('com.heyzap.cordova.ads.BannerAd')
+    BannerAd: cordova.require('heyzap-cordova.ads.BannerAd')
   };
 
   Common.registerEventsForService(SERVICE, HeyzapAds.Events, false);

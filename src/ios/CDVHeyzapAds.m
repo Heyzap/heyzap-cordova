@@ -38,6 +38,8 @@
 
 # pragma mark - Cordova exec methods
 
+NSString *const HZ_FRAMEWORK = @"cordova";
+
 - (void)start:(CDVInvokedUrlCommand *)command {
     __weak CDVHeyzapAds *weakSelf = self;
     
@@ -52,7 +54,7 @@
             if (publisherID) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [HeyzapAds startWithPublisherID:publisherID andOptions:options];
+                    [HeyzapAds startWithPublisherID:publisherID andOptions:options andFramework: HZ_FRAMEWORK];
                     
                     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
                     [[weakSelf commandDelegate] sendPluginResult:result callbackId:command.callbackId];

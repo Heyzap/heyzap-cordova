@@ -15,6 +15,10 @@ Supported Platforms
 - iOS (cordova-ios engine 3.8.0 and later)
 - Android (cordova-android engine 4.0.0 and later)
 
+External Libraries Used
+-----------------------
+- [ES6-Promise](https://github.com/jakearchibald/es6-promise) by Jake Archibald.
+
 Documentation
 -------------
 Please visit our [documentation page](https://developers.heyzap.com/docs/cordova_sdk_setup_and_requirements) for guides on how to integrate heyzap with your Cordova app.
