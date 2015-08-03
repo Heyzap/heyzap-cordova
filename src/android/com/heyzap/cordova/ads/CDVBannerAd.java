@@ -108,7 +108,7 @@ public class CDVBannerAd extends CDVHeyzapAbstractPlugin {
 
             try {
                 dimensions.put("x", currentBannerAdView.getLeft());
-                dimensions.put("y", currentBannerAdView.getRight());
+                dimensions.put("y", currentBannerAdView.getTop());
                 dimensions.put("width", currentBannerAdView.getWidth());
                 dimensions.put("height", currentBannerAdView.getHeight());
 
