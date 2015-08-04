@@ -90,16 +90,20 @@ abstract class CDVHeyzapAbstractPlugin extends CordovaPlugin implements ICDVHeyz
 
     public void addEventListener(final JSONArray args, final CallbackContext callbackContext) {
 
+        JSONArray callbackData = new JSONArray();
+        callbackData.put("OK");
+
         if (listener == null) {
             listener = new CDVListener(callbackContext);
-            PluginResult result = new PluginResult(PluginResult.Status.OK);
+
+            PluginResult result = new PluginResult(PluginResult.Status.OK, callbackData);
             result.setKeepCallback(true);
             callbackContext.sendPluginResult(result);
 
             setListener(listener);
 
         } else {
-            callbackContext.success();
+            callbackContext.success(callbackData);
         }
     }
 }

@@ -94,7 +94,7 @@ NSString *const POSITION_BOTTOM = @"bottom";
     dispatch_async(dispatch_get_main_queue(), ^{
         
         @try {
-            if (![weakSelf currentBannerAd]) {
+            if (![weakSelf currentBannerAd] || [[weakSelf currentBannerAd] isHidden]) {
                 CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"There is no banner ad currently showing."];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 

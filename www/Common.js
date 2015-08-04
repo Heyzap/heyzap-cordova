@@ -131,38 +131,44 @@
     /**
      * Dispatch an event that is sent by a native event listener to registered JavaScript event listeners
      * @param  {string} service Name of cordova service (i.e. 'CDVHeyzapAds')
-     * @param  {string} event   Name of the event that was fired
-     * @param  {*[]} data       Any additional data that the native event listeners passed back
+     * @param  {*[]} data Any additional data that the native event listeners passed back
+     * The first element in data must be the name of the event.
      *
      * @private
      */
     dispatchEvent: function Common_dispatchEvent(service, data) {
-      var serviceEventInfo = Common.listeners[service];
 
-      if (!serviceEventInfo) {
-        return;
-      }
+      // A crash occurs on iOS without the timeout when a break point is set in the event handler
+      // Crash message: "Multiple locks on web thread not allowed! Please file a bug. Crashing now"
+      // See https://github.com/forcedotcom/SalesforceMobileSDK-iOS/issues/252 for more info
+      window.setTimeout(function() {
+        var serviceEventInfo = Common.listeners[service];
 
-      var event = data[0];
+        if (!serviceEventInfo || data == null || data.length === 0) {
+          return;
+        }
 
-      if (event === "OK") {
-        serviceEventInfo.nativeEventHandlerRegistered = true;
-        return;
-      }
+        var event = data.shift();
 
-      var eventListeners = serviceEventInfo.eventListeners;
+        if (event === "OK") {
+          serviceEventInfo.nativeEventHandlerRegistered = true;
+          return;
+        }
 
-      if (eventListeners[event] instanceof Array) {
+        var eventListeners = serviceEventInfo.eventListeners;
 
-        for (var i = 0; i < eventListeners[event].length; i++) {
-          try {
-            eventListeners[event][i].apply(null, data);
+        if (eventListeners[event] instanceof Array) {
 
-          } catch(e) {
-            console.error('[HeyzapAds - ' + service + '] Error dispatching event: "' + event + '" for callback: ' + eventListeners[event][i], e);
+          for (var i = 0; i < eventListeners[event].length; i++) {
+            try {
+              eventListeners[event][i].apply(null, data);
+
+            } catch(e) {
+              console.error('[HeyzapAds - ' + service + '] Error dispatching event: "' + event + '" for callback: ' + eventListeners[event][i], e);
+            }
           }
         }
-      }
+      }, 0);
     }
   };
 

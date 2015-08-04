@@ -33,7 +33,7 @@
   }
 
   if (!Promise) {
-    Promise = require('heyzap-cordova.vendor.PromisePolyfil');
+    Promise = require('heyzap-cordova.vendor.PromisePolyfill').Promise;
   }
 
   module.exports = Promise;

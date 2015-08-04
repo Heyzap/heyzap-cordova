@@ -38,11 +38,11 @@
 
 - (void)addEventListener:(CDVInvokedUrlCommand *)command {
     
-    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:@[@"OK"]];
     
     if (!self.listenerCallbackId) {
         self.listenerCallbackId = command.callbackId;
-        result.keepCallback = [NSNumber numberWithInt:true];
+        [result setKeepCallbackAsBool:YES];
         [self addDelegate];
     }
     
@@ -145,7 +145,7 @@ NSString *const LOADED_CALLBACK = @"loaded";
     [mData addObjectsFromArray:data];
     
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:mData];
-    result.keepCallback = [NSNumber numberWithInt:true];
+    [result setKeepCallbackAsBool:YES];
     [self.commandDelegate sendPluginResult:result callbackId:self.listenerCallbackId];
 }
 
