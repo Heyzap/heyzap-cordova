@@ -71,7 +71,7 @@
      * @return {Promise} An ES-6 style promise if the native call succeeded or failed.
      * @throws {TypeError} If the above parameters do not match their types
      */
-    show: function show(tag, successCallback, failureCallback) {
+    show: function show(tag) {
       if (typeof(tag) !== 'undefined' && typeof(tag) !== 'string') {
         throw new TypeError('"tag" must be undefined or of type string');
       }

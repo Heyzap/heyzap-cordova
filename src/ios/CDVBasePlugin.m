@@ -36,6 +36,16 @@
 
 @implementation CDVBasePlugin
 
+- (UIViewController *)topMostViewController {
+    UIViewController *topController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    
+    while ([topController presentedViewController]) {
+        topController = [topController presentedViewController];
+    }
+    
+    return topController;
+}
+
 - (void)addEventListener:(CDVInvokedUrlCommand *)command {
     
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:@[@"OK"]];

@@ -26,7 +26,6 @@
 (function() {
   "use strict";
 
-  var DEFAULT_CALLBACK = function(){};
   var Promise = require('heyzap-cordova.Promise');
 
   var Common = {
@@ -75,9 +74,13 @@
 
       var eventListeners = {};
 
+      /*jshint forin: false */
+
       for (var key in events) {
         eventListeners[events[key]] = [];
       }
+      
+      /*jshint forin: true */
 
       Common.listeners[service] = {
         eventListeners: eventListeners,

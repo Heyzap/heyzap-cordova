@@ -64,7 +64,13 @@
         
         @try {
             NSString *tag = [command argumentAtIndex:0 withDefault:@"" andClass:[NSString class]];
-            [HZIncentivizedAd showForTag:tag];
+            
+            HZShowOptions *options = [[HZShowOptions alloc] init];
+            options.tag = tag;
+            options.viewController = [self topMostViewController];
+            
+            [HZIncentivizedAd showWithOptions:options];
+            
             result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         }
         @catch (NSException *e) {

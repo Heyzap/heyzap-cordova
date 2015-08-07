@@ -35,8 +35,10 @@
 
   <!-- iOS -->
   <platform name="ios">
-
-    <hook type="before_plugin_install" src="hooks/after_plugin_add/000_create_symlinks.js" />
+    
+    <!-- Hooks -->
+    <hook type="before_plugin_install" src="hooks/before_plugin_install/000_create_symlinks.js" />
+    <!-- / Hooks -->
     
     <!-- Modify Cordova config -->
     <config-file target="config.xml" parent="/*">
@@ -88,7 +90,7 @@
     <!-- / Adapters -->
     
     <!-- Heyzap SDK -->
-    <framework src="src/ios/sdk/HeyzapAds.framework" custom="true" compiler-flags="-fmodules" />
+    <framework src="src/ios/sdk/Heyzap/HeyzapAds.framework" custom="true" compiler-flags="-fmodules" />
     <!-- / Heyzap SDK -->
 
     <!-- External Frameworks -->

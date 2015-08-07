@@ -29,7 +29,7 @@
   var Promise;
 
   if (typeof(window) !== 'undefined') {
-    Promise = window['Promise'];
+    Promise = window.Promise;
   }
 
   if (!Promise) {

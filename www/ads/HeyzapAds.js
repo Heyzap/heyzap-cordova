@@ -44,7 +44,7 @@
         }
       }
     }
-  }
+  };
 
   /**
    * Flag to indicate no special options are being used
