@@ -30,11 +30,13 @@
   <!-- Vendor -->
   <js-module src="www/vendor/es6-promise.min.js" name="vendor.PromisePolyfill"></js-module>
   <!-- / Vendor -->
-
+  
   <!-- / Plugin Client Side Code -->
 
   <!-- iOS -->
   <platform name="ios">
+
+    <hook type="before_plugin_install" src="hooks/after_plugin_add/000_create_symlinks.js" />
     
     <!-- Modify Cordova config -->
     <config-file target="config.xml" parent="/*">
@@ -86,7 +88,7 @@
     <!-- / Adapters -->
     
     <!-- Heyzap SDK -->
-    <framework src="src/ios/sdk/HeyzapAds.framework" custom="true" />
+    <framework src="src/ios/sdk/HeyzapAds.framework" custom="true" compiler-flags="-fmodules" />
     <!-- / Heyzap SDK -->
 
     <!-- External Frameworks -->
