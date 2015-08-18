@@ -67,7 +67,7 @@ public class CDVInterstitialAd extends CDVHeyzapAbstractPlugin {
             callbackContext.success();
 
         } else {
-            callbackContext.error("Incentivized ad is not available.");
+            callbackContext.error("Interstitial Ad is not available.");
         }
     }
 
@@ -77,7 +77,7 @@ public class CDVInterstitialAd extends CDVHeyzapAbstractPlugin {
             callbackContext.success();
 
         } else {
-            callbackContext.error("Incentivized ad is not available");
+            callbackContext.error("Interstitial Ad is not available");
         }
     }
 

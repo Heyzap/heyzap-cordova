@@ -24,7 +24,6 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 
 #import "CDVHZIncentivizedAd.h"
-#import <HeyzapAds/HeyzapAds.h>
 
 @implementation CDVHZIncentivizedAd
 

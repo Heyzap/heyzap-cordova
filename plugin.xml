@@ -238,6 +238,7 @@
       <activity android:name="com.heyzap.sdk.ads.HeyzapInterstitialActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
       <activity android:name="com.heyzap.sdk.ads.HeyzapVideoActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
       <activity android:name="com.heyzap.sdk.ads.HeyzapProxyActivity" />
+      <activity android:name="com.heyzap.sdk.ads.VASTActivity" />
 
       <!-- Heyzap SDK Test Activity -->
       <activity android:name="com.heyzap.sdk.ads.MediationTestActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />

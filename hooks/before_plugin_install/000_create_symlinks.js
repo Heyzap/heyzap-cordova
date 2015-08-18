@@ -1,4 +1,6 @@
 module.exports = function(ctx) {
+  "use strict";
+  
   console.log('[Heyzap] - Re-creating symlinks in iOS frameworks.');
 
   var fs, path;

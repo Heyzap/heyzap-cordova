@@ -74,13 +74,9 @@
 
       var eventListeners = {};
 
-      /*jshint forin: false */
-
       for (var key in events) {
         eventListeners[events[key]] = [];
       }
-      
-      /*jshint forin: true */
 
       Common.listeners[service] = {
         eventListeners: eventListeners,
