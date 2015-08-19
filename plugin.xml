@@ -25,7 +25,7 @@
   <js-module src="www/ads/BannerAd.js" name="ads.BannerAd"></js-module>
 
   <js-module src="www/Common.js" name="Common"></js-module>
-  <js-module src="www/promise.js" name="Promise"></js-module>
+  <js-module src="www/Promise.js" name="Promise"></js-module>
 
   <!-- Vendor -->
   <js-module src="www/vendor/es6-promise.min.js" name="vendor.PromisePolyfill"></js-module>
