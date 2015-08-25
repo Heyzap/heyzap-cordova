@@ -1,14 +1,23 @@
 Heyzap Cordova Plugin
 =====================
 
-**Heyzap SDK Version: 9.0.6**
+Version: 9.0.6
 
 This the Heyzap SDK plugin for Apache Cordova.
 
-Installing:
+Documentation
+-------------
+[See our documentation](docs/setup_and_requirements.md) for guides on how to integrate the Heyzap SDK along with other third-party SDKs to your Cordova app.
+
+Installing
+----------
 ```
 cordova plugin add heyzap-cordova
 ```
+
+Adding Third-Party SDKs
+-----------------------
+Third party SDKs can be added by adding their appropriate plugins found in the [Heyzap Cordova Extras](http://www.github.com/Heyzap/heyzap-cordova-extras) repository.
 
 Supported Platforms
 -------------------
@@ -18,7 +27,3 @@ Supported Platforms
 External Libraries Used
 -----------------------
 - [ES6-Promise](https://github.com/jakearchibald/es6-promise) by Jake Archibald.
-
-Documentation
--------------
-Please visit our [documentation page](https://developers.heyzap.com/docs/cordova_sdk_setup_and_requirements) for guides on how to integrate heyzap with your Cordova app.
