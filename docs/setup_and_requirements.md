@@ -89,7 +89,7 @@ Step 5: Test your 3rd-Party Integrations (Optional)
 
 The Heyzap SDK comes with a Mediation Debug View that you can test each network you've integrated with:
 
-<img src="docs/iOSDebugMediationViewController.png">
+<img src="iOSDebugMediationViewController.png">
 
 The first screen lets you pick a network. Once you choose a network, you'll see if:
 
