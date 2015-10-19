@@ -74,7 +74,7 @@
 - (void)reportImpression;
 
 /**
- *  When the user clicks the ad, call this method to present an SKStoreProductViewController for that ad. This method will handle reporting the click to Heyzap.
+ *  When the user clicks the ad, call this method to present an SKStoreProductViewController for that ad. This method will handle reporting the click to Heyzap. This method must be called on the main queue.
  *
  *  @param viewController The view controller which should present the `SKStoreProductViewController`.
  *  @param storeDelegate  The delegate for the `SKStoreProductViewController`. The delegate should dismiss the `SKStoreProductViewController` when `productViewControllerDidFinish:` is called on it.
