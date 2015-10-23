@@ -40,7 +40,12 @@ Step 2. Add your 3rd-party SDKs
     cordova plugin add https://github.com/Heyzap/heyzap-cordova-extras.git#:heyzap-cordova-facebook_audience_network
     ```
 
-- **iAd"**: **Note: This network works in iOS only.** No extra integration is required for iAd on iOS.
+- **iAd**: **Note: This network works in iOS only.** No extra integration is required for iAd on iOS.
+
+- **Leadbolt**: Install the Heyzap's Leadbolt Cordova wrapper plugin, run:
+    ```
+    cordova plugin add https://github.com/Heyzap/heyzap-cordova-extras.git#:heyzap-cordova-leadbolt
+    ```
 
 - **MdotM**: No extra integration is required for MdotM
 

@@ -99,21 +99,21 @@
     <framework src="CoreTelephony.framework"/>
     <framework src="EventKit.framework"/>
     <framework src="EventKitUI.framework"/>
+    <framework src="MediaPlayer.framework"/>
     <framework src="MobileCoreServices.framework"/>
     <framework src="QuartzCore.framework"/>
     <framework src="Security.framework"/>
     <framework src="Social.framework"/>
     <framework src="StoreKit.framework"/>
+    <framework src="SystemConfiguration.framework"/>
     <framework src="iAd.framework"/>
 
     <framework src="libxml2.dylib"/>
+    <framework src="libsqlite3.dylib" /> 
     <!-- / External Frameworks -->
 
     <info>
-      You may need to enable modules in your Xcode project settings before building the app.
-      In the Xcode project explorer click on your app project, Go to the 'Build Settings' tab and change 'Enable Modules (C and Objective-C)' to 'yes'.
-
-      To add additional ad networks, simply drag and drop the SDK files/frameworks to the Xcode project.
+      Third party SDKs can be added by adding their appropriate plugins found in the http://www.github.com/Heyzap/heyzap-cordova-extras.
     </info>
   </platform>
   <!-- / iOS -->
@@ -195,7 +195,7 @@
     <info>
       You may need to install "Google Play Services" from the "Android Extras" section using the Android SDK manager (run "android").
 
-      To add additional ad networks, simply copy the .jar files to {ROOT}/platforms/android/libs/ folder.
+      Third party SDKs can be added by adding their appropriate plugins found in the http://www.github.com/Heyzap/heyzap-cordova-extras.
     </info>
 
   </platform>

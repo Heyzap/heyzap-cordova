@@ -10,7 +10,7 @@
 @class HZNativeAdCollection;
 
 /**
- *  Use this class to fetch native ads from Heyzap. See `HZNativeAdCollection` and `HZNativeAd` for details.
+ *  Use this class to fetch native ads from Heyzap. See `HZNativeAdCollection` and `HZNativeAd` for details. All methods on this class must be called from the main queue.
  */
 @interface HZNativeAdController : NSObject
 

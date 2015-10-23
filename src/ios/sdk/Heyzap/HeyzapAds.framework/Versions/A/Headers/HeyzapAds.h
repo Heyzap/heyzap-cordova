@@ -51,7 +51,7 @@
 #define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
 #endif
 
-#define SDK_VERSION @"9.0.6"
+#define SDK_VERSION @"9.1.14"
 
 #if __has_feature(objc_modules)
 @import AdSupport;
@@ -96,8 +96,9 @@ extern NSString * const HZNetworkChartboost;
 extern NSString * const HZNetworkAdColony;
 extern NSString * const HZNetworkAdMob;
 extern NSString * const HZNetworkIAd;
-extern NSString * const HZNetworkHyperMX;
+extern NSString * const HZNetworkHyprMX;
 extern NSString * const HZNetworkHeyzapExchange;
+extern NSString * const HZNetworkLeadbolt;
 
 // General Network Callbacks
 extern NSString * const HZNetworkCallbackInitialized;
@@ -111,12 +112,13 @@ extern NSString * const HZNetworkCallbackIncentivizedResultIncomplete;
 extern NSString * const HZNetworkCallbackIncentivizedResultComplete;
 extern NSString * const HZNetworkCallbackAudioStarting;
 extern NSString * const HZNetworkCallbackAudioFinished;
-extern NSString * const HZNetworkCallbackBannerLoaded;
-extern NSString * const HZNetworkCallbackBannerClick;
-extern NSString * const HZNetworkCallbackBannerHide;
-extern NSString * const HZNetworkCallbackBannerDismiss;
-extern NSString * const HZNetworkCallbackBannerFetchFailed;
 extern NSString * const HZNetworkCallbackLeaveApplication;
+
+extern NSString * const HZNetworkCallbackBannerLoaded DEPRECATED_ATTRIBUTE;
+extern NSString * const HZNetworkCallbackBannerClick DEPRECATED_ATTRIBUTE;
+extern NSString * const HZNetworkCallbackBannerHide DEPRECATED_ATTRIBUTE;
+extern NSString * const HZNetworkCallbackBannerDismiss DEPRECATED_ATTRIBUTE;
+extern NSString * const HZNetworkCallbackBannerFetchFailed DEPRECATED_ATTRIBUTE;
 
 // Chartboost Specific Callbacks
 extern NSString * const HZNetworkCallbackChartboostMoreAppsFetchFailed;
@@ -216,16 +218,9 @@ extern NSString * const HZRemoteDataRefreshedNotification;
 @end
 
 /**
- *  A class with miscellaneous Heyzap Ads methods.
+ *  A class with miscellaneous Heyzap Ads methods. All methods on this class must be called from the main queue.
  */
 @interface HeyzapAds : NSObject
-
-/**
- *  Sets the object to receive HZIncentivizedAdDelegate callbacks
- *
- *  @param delegate An object conforing to the HZIncentivizedAdDelegate protocol
- */
-+ (void) setIncentiveDelegate: (id<HZIncentivizedAdDelegate>) delegate __attribute__((deprecated("Call `HZIncentivizedAd setDelegate:` instead.")));
 
 /**
  *  Sets an object to be forwarded all callbacks sent by the specified network.
@@ -314,6 +309,13 @@ extern NSString * const HZRemoteDataRefreshedNotification;
  *  @see pauseExpensiveWork
  */
 + (void)resumeExpensiveWork;
+
+/**
+ * Returns a raw json string of developer-settable data or an empty json string if no data is available.
+ * 
+ */
++ (NSString *) getRemoteDataJsonString;
+
 
 #pragma mark - Record IAP Transaction
 

@@ -39,7 +39,7 @@
 
 @protocol HZAdsDelegate;
 
-/** HZVideoAd is responsible for fetching and showing video ads. */
+/** HZVideoAd is responsible for fetching and showing video ads. All methods on this class must be called from the main queue. */
 @interface HZVideoAd : NSObject
 
 #pragma mark - Showing Ads
@@ -98,19 +98,37 @@
  */
 + (void) fetchForTag:(NSString *)tag withCompletion: (void (^)(BOOL result, NSError *error))completion;
 
+
 /**
- *  Whether or not a video ad is ready to show
+ *  Fetches a video ad for each of the given tags.
  *
- *  @return If the video is ready to show
+ *  @param tags An NSArray of NSString* identifiers for the location of ads which you can use to disable ads from your dashboard.
+ */
++ (void) fetchForTags:(NSArray *)tags;
+
+
+/**
+ *  Fetches a video ad for each of the given tags with an optional completion handler.
+ *
+ *  @param tag        An NSArray of NSString* identifiers for the location of ads which you can use to disable ads from your dashboard.
+ *  @param completion A block called when an ad for each tag is fetched or fails to fetch. `result` states whether the fetch was sucessful; the error object describes the issue, if there was one.
+ */
++ (void) fetchForTags:(NSArray *)tags withCompletion:(void (^)(BOOL result, NSError *error))completion;
+
+
+/**
+ *  Whether or not a video ad is ready to show.
+ *
+ *  @return If a video is ready to show.
  */
 + (BOOL) isAvailable;
 
 /**
- *  Whether or not the video is ready to show for the given tag
+ *  Whether or not a video is ready to show for the given tag.
  *
  *  @param tag An identifier for the location of the ad which you can use to disable the ad from your dashboard.
  *
- *  @return Whether or not the video is ready to show for the given tag
+ *  @return Whether or not a video is ready to show for the given tag.
  */
 + (BOOL) isAvailableForTag: (NSString *) tag;
 
