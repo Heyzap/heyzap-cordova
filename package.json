@@ -1,6 +1,6 @@
 {
   "name": "heyzap-cordova",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Heyzap SDK for Apache Cordova/Adobe PhoneGap",
   "cordova": {
     "id": "heyzap-cordova",
