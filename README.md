@@ -1,7 +1,7 @@
 Heyzap Cordova Plugin
 =====================
 
-Version: 9.6.1
+Version: 9.6.7
 
 This the Heyzap SDK plugin for Apache Cordova.
 
