@@ -80,28 +80,53 @@ NSString *const FETCH_FAILED_CALLBACK = @"fetch_failed";
 NSString *const AUDIO_STARTED_CALLBACK = @"audio_started";
 NSString *const AUDIO_FINISHED_CALLBACK = @"audio_finished";
 NSString *const CLICKED_CALLBACK = @"clicked";
+NSString *const WILL_LEAVE_APPLICATION = @"will_leave_application";
 
 - (void) didShowAdWithTag:(NSString *)tag {
+    if (tag == nil) {
+      tag = @"default";
+    }
+
     [self dispatchCallback:SHOW_CALLBACK withData:@[tag]];
 }
 
 - (void) didFailToShowAdWithTag:(NSString *)tag andError:(NSError *)error {
+    if (tag == nil) {
+      tag = @"default";
+    }
+
     [self dispatchCallback:SHOW_FAILED_CALLBACK withData:@[tag, [error localizedDescription]]];
 }
 
 - (void) didClickAdWithTag:(NSString *)tag {
+   if (tag == nil) {
+      tag = @"default";
+    }
+
     [self dispatchCallback:CLICKED_CALLBACK withData:@[tag]];
 }
 
 - (void) didHideAdWithTag:(NSString *)tag {
+    if (tag == nil) {
+      tag = @"default";
+    }
+
     [self dispatchCallback:HIDE_CALLBACK withData:@[tag]];
 }
 
 - (void) didReceiveAdWithTag:(NSString *)tag {
+    if (tag == nil) {
+      tag = @"default";
+    }
+
     [self dispatchCallback:AVAILABLE_CALLBACK withData:@[tag]];
 }
 
 - (void) didFailToReceiveAdWithTag: (NSString *)tag {
+    if (tag == nil) {
+      tag = @"default";
+    }
+  
     [self dispatchCallback:FETCH_FAILED_CALLBACK withData:@[tag]];
 }
 
@@ -131,17 +156,30 @@ NSString *const INCOMPLETE_CALLBACK = @"incomplete";
 NSString *const ERROR_CALLBACK = @"error";
 NSString *const LOADED_CALLBACK = @"loaded";
 
-- (void)bannerDidReceiveAd:(HZBannerAd *)banner {
-    [self dispatchCallback:LOADED_CALLBACK];
+- (void)bannerDidReceiveAd:(HZBannerAdController *)banner {
+  [self dispatchCallback:LOADED_CALLBACK];
 }
 
-- (void)bannerDidFailToReceiveAd:(HZBannerAd *)banner error:(NSError *)error {
-    [self dispatchCallback:ERROR_CALLBACK];
+- (void)bannerDidFailToReceiveAd:(HZBannerAdController *)banner error:(NSError *)error {
+  [self dispatchCallback:ERROR_CALLBACK];
 }
 
-- (void)bannerWasClicked:(HZBannerAd *)banner {
-    [self dispatchCallback:CLICKED_CALLBACK];
+- (void)bannerWasClicked:(HZBannerAdController *)banner {
+  [self dispatchCallback:CLICKED_CALLBACK];
 }
+
+- (void)bannerWillPresentModalView:(HZBannerAdController *)banner {
+  [self dispatchCallback:SHOW_CALLBACK];
+}
+
+- (void)bannerDidDismissModalView:(HZBannerAdController *)banner {
+  [self dispatchCallback:HIDE_CALLBACK];
+}
+
+- (void)bannerWillLeaveApplication:(HZBannerAdController *)banner {
+  [self dispatchCallback:WILL_LEAVE_APPLICATION];
+}
+
 
 # pragma mark - dispatch callback methods
 

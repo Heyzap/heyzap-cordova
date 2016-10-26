@@ -67,7 +67,7 @@
             HZShowOptions *options = [[HZShowOptions alloc] init];
             options.tag = tag;
             options.viewController = [self topMostViewController];
-            
+          
             [HZIncentivizedAd showWithOptions:options];
             
             result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];

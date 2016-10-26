@@ -75,7 +75,7 @@ public class CDVIncentivizedAd extends CDVHeyzapAbstractPlugin {
     }
 
     private void displayIfAvailable(final CallbackContext callbackContext, String tag) {
-        if (IncentivizedAd.isAvailable(tag)) {
+       if (IncentivizedAd.isAvailable(tag)) {
             IncentivizedAd.display(cordova.getActivity(), tag);
             callbackContext.success();
 

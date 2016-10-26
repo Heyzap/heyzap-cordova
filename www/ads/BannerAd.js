@@ -30,9 +30,9 @@
   var Common = cordova.require("heyzap-cordova.Common");
 
   /**
-   * Options for Banner ads  
+   * Options for Banner ads
    * @param {Object} [options] options An object where the keys are valid options in the HeyzapAds.Options object. (i.e. { facebookBannerSize: HeyzapAds.BannerAd.Options.FacebookBannerSize.HEIGHT_90 } )
-   * 
+   *
    * @memberOf HeyzapAds.BannerAd.Options
    */
   var Options = function BannerAd_Options(options) {
@@ -146,10 +146,9 @@
      * @param  {!string} position The position of the banner ad on the screen
      * Can be either HeyzapAds.BannerAd.POSITION_TOP or HeyzapAds.BannerAd.POSITION_BOTTOM
      * @param  {HeyzapAds.BannerAd.Options} [options] options  Additional Banner Ad options
-     * @param  {string} [tag] tag      
      * @return {Promise} An ES-6 style promise if the native call succeeded or failed.
      */
-    show: function BannerAd_show(position, options, tag) {
+    show: function BannerAd_show(position, options) {
       if (position !== BannerAd.POSITION_TOP && position !== BannerAd.POSITION_BOTTOM) {
         throw new TypeError('"postion" must be either BannerAd.POSITION_TOP or BannerAd.POSITION_BOTTOM');
       }
@@ -159,11 +158,7 @@
         options = null;
       }
 
-      if (typeof(tag) !== 'undefined' && typeof(tag) !== 'string') {
-        throw new TypeError('"tag" must be a string');
-      }
-
-      return Common.exec(SERVICE, 'show', position, options, tag);
+      return Common.exec(SERVICE, 'show', position, options);
     },
 
     /**

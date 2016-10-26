@@ -29,7 +29,6 @@
 
 - (void)start:(CDVInvokedUrlCommand *)command;
 - (void)mediationTestSuite:(CDVInvokedUrlCommand *)command;
-- (void)remoteData:(CDVInvokedUrlCommand *)command;
 - (void)onIAPComplete:(CDVInvokedUrlCommand *)command;
 
 @end

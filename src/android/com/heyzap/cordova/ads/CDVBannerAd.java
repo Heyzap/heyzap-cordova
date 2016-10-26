@@ -27,7 +27,10 @@ package com.heyzap.cordova.ads;
 
 import android.util.Log;
 import android.view.Gravity;
+import android.widget.FrameLayout;
+import android.view.View;
 import com.heyzap.sdk.ads.BannerAdView;
+import com.heyzap.sdk.ads.BannerAd;
 import com.heyzap.sdk.ads.HeyzapAds.CreativeSize;
 import com.heyzap.sdk.ads.HeyzapAds.BannerOptions;
 import org.apache.cordova.CallbackContext;
@@ -69,25 +72,22 @@ public class CDVBannerAd extends CDVHeyzapAbstractPlugin {
     }
 
     public void show(final JSONArray args, final CallbackContext callbackContext) {
-        String jsonPosition = args.optString(0, POSITION_BOTTOM);
-        BannerOptions options = getOptions(args.optJSONObject(1));
-        String tag = args.optString(2);
+      String jsonPosition = args.optString(0, POSITION_BOTTOM);
+      BannerOptions options = getOptions(args.optJSONObject(1));
 
-        int position = Gravity.TOP;
+      int position = Gravity.TOP;
 
-        if (jsonPosition.equals(POSITION_BOTTOM)) {
-            position = Gravity.BOTTOM;
-        }
+      if (jsonPosition.equals(POSITION_BOTTOM)) {
+          position = Gravity.BOTTOM;
+      }
 
-        BannerAdView currentBannerAdView = BannerAd.getCurrentBannerAdView();
-
-        if (currentBannerAdView != null && currentBannerAdView.getParent() != null) {
-            callbackContext.success("A banner is already showing");
-
-        } else {
-            BannerAd.display(cordova.getActivity(), position, tag, options);
-            callbackContext.success();
-        }
+      // View currentBannerAdView = BannerAd.getCurrentBannerAdView();
+      // if (currentBannerAdView != null && currentBannerAdView.getParent() != null && currentBannerAdView.getVisibility() != View.GONE) {
+      //     callbackContext.success("A banner is already showing");
+      // } else {
+      BannerAd.display(cordova.getActivity(), position, options);
+      callbackContext.success();
+      // }
     }
 
     public void hide(final JSONArray args, final CallbackContext callbackContext) {
@@ -101,34 +101,34 @@ public class CDVBannerAd extends CDVHeyzapAbstractPlugin {
     }
 
     public void dimensions(final JSONArray args, final CallbackContext callbackContext) {
-        BannerAdView currentBannerAdView = BannerAd.getCurrentBannerAdView();
+      View currentBannerAdView = BannerAd.getCurrentBannerAdView();
 
-        if (currentBannerAdView != null && currentBannerAdView.getParent() != null) {
-            JSONObject dimensions = new JSONObject();
+      if (currentBannerAdView != null && currentBannerAdView.getParent() != null) {
+          JSONObject dimensions = new JSONObject();
 
-            try {
-                dimensions.put("x", currentBannerAdView.getLeft());
-                dimensions.put("y", currentBannerAdView.getTop());
-                dimensions.put("width", currentBannerAdView.getWidth());
-                dimensions.put("height", currentBannerAdView.getHeight());
+          try {
+              dimensions.put("x", currentBannerAdView.getLeft());
+              dimensions.put("y", currentBannerAdView.getTop());
+              dimensions.put("width", currentBannerAdView.getWidth());
+              dimensions.put("height", currentBannerAdView.getHeight());
 
-            } catch (JSONException e) {
-                String message = "Could not get current banner ad dimensions: " + e.getMessage();
+          } catch (JSONException e) {
+              String message = "Could not get current banner ad dimensions: " + e.getMessage();
 
-                Log.e(TAG, message);
-                e.printStackTrace();
+              Log.e(TAG, message);
+              e.printStackTrace();
 
-                callbackContext.error(message);
-                return;
-            }
+              callbackContext.error(message);
+              return;
+          }
 
-            callbackContext.success(dimensions);
-        }
+          callbackContext.success(dimensions);
+      }
     }
 
     @Override
     public void setListener(CDVListener listener) {
-        BannerAd.setBannerListener(listener);
+      BannerAd.setBannerListener(listener);
     }
 
     private BannerOptions getOptions(JSONObject jsonOptions) {
