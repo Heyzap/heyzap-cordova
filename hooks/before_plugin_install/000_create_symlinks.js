@@ -1,6 +1,9 @@
+var path = require('path');
+var fs = require('fs');
+
 module.exports = function(ctx) {
   "use strict";
-  
+
   console.log('[Heyzap] - Re-creating symlinks in iOS frameworks.');
 
   var fs, path;
@@ -8,7 +11,7 @@ module.exports = function(ctx) {
   try {
     fs = require('fs');
     path = require('path');
-    
+
   } catch (e) {
     console.warn('[Heyzap] - Could not find "fs" or "path" module(s). Exiting...');
     return;
@@ -26,6 +29,12 @@ module.exports = function(ctx) {
       'Headers': 'Versions/A/Headers',
       'HeyzapAds': 'Versions/A/HeyzapAds',
       'Versions/Current': 'Versions/A'
+    },
+    'Heyzap/FYBHZMediationTestSuiteEF.framework': {
+      'Headers': 'Versions/A/Headers',
+      'Versions/Current': 'Versions/A',
+      'FYBHZMediationTestSuiteEF': 'Versions/A/FYBHZMediationTestSuiteEF',
+      'Resources': 'Versions/A/Resources'
     }
   };
 
@@ -64,5 +73,5 @@ module.exports = function(ctx) {
       }
     }
   }
-  
+
 };

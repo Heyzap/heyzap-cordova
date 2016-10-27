@@ -75,7 +75,7 @@
   /**
    * Disable mediation, even if third party networks are present.
    * This is not required, but is recommended for developers not using mediation. If
-   * you're mediating Heyzap through someone (e.g. AdMob), it is *strongly* recommended that you 
+   * you're mediating Heyzap through someone (e.g. AdMob), it is *strongly* recommended that you
    * disable Heyzap's mediation to prevent any potential conflicts.
    * @type {Boolean}
    */
@@ -101,17 +101,17 @@
      * @type {Object}
      */
     Events: {
-      NETWORK_CALLBACK: 'networkCallbacks'
+
     },
 
     /**
      * Start Heyzap Ads. This needs to called as early as possible in the application lifecycle.
      * @param  {!string} publisherId Publisher ID on your Heyzap Dashboard
      * @param  {!HeyzapAds.Options} [options] options to pass to start method
-     * 
+     *
      * @return {Promise} An ES-6 style promise if the native call succeeded or failed.
      * @throws {TypeError} If the above parameters do not match their types
-     * 
+     *
      */
     start: function HeyzapAds_start(publisherId, options) {
 
@@ -129,7 +129,7 @@
     /**
      * Presents a new view that displays integration information and allows fetch/show testing
      * of various supported ad networks
-     * 
+     *
      * @return {Promise} An ES-6 style promise if the native call succeeded or failed.
      */
     showMediationTestSuite: function HeyzapAds_showMediationTestSuite() {
@@ -137,24 +137,15 @@
     },
 
     /**
-     * Returns an object of developer-settable data or an empty object if no data is available
-     * 
-     * @return {Promise} An ES-6 style promise if the native call succeeded or failed. The success callback will have the remote data object
-     */
-    fetchRemoteData: function HeyzapAds_getRemoteData() {
-      return Common.exec(SERVICE, 'remoteData');
-    },
-
-    /**
      * Report an In-App Purchase to Heyzap
      * Note that this does *not* have to be called on iOS unless
      * the SDK is started with the 'HeyzapAds.Options.disableAutomaticIAPRecording' option enabled
      * or the In-App Purchase is not through the iOS appstore
-     * 
+     *
      * @param  {string} productId   Unique identifier of the product
      * @param  {string} productName Common name of the product
      * @param  {number} price       Price of the product in USD
-     * 
+     *
      * @return {Promise} An ES-6 style promise if the native call succeeded or failed.
      */
     onIAPComplete: function HeyzapAds_onIAPComplete(productId, productName, price) {
@@ -186,8 +177,6 @@
     Options: Options,
 
     InterstitialAd: cordova.require('heyzap-cordova.ads.InterstitialAd'),
-
-    VideoAd: cordova.require('heyzap-cordova.ads.VideoAd'),
 
     IncentivizedAd: cordova.require('heyzap-cordova.ads.IncentivizedAd'),
 

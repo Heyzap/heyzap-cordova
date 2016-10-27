@@ -33,7 +33,7 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class CDVListener implements HeyzapAds.OnStatusListener, HeyzapAds.OnIncentiveResultListener, HeyzapAds.BannerListener, HeyzapAds.NetworkCallbackListener {
+public class CDVListener implements HeyzapAds.OnStatusListener, HeyzapAds.OnIncentiveResultListener, HeyzapAds.BannerListener, HeyzapAds.NetworkCallbackListener, HeyzapAds.StaticBannerListener {
     private static final String TAG = "CDVListener";
     CallbackContext context = null;
 
@@ -96,6 +96,18 @@ public class CDVListener implements HeyzapAds.OnStatusListener, HeyzapAds.OnInce
     private static final String FETCH_FAILED_CALLBACK = "fetch_failed";
     private static final String AUDIO_STARTED_CALLBACK = "audio_started";
     private static final String AUDIO_FINISHED_CALLBACK = "audio_finished";
+
+    public void onAdClicked() {
+      dispatchCallback(CLICKED_CALLBACK, "");
+    }
+
+    public void onAdError(HeyzapAds.BannerError paramBannerError) {
+      dispatchCallback(SHOW_FAILED_CALLBACK, "");
+    }
+
+    public void onAdLoaded() {
+      dispatchCallback(AVAILABLE_CALLBACK, "");
+    }
 
     @Override
     public void onShow(String tag) {

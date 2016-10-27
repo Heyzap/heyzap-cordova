@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="heyzap-cordova" version="1.1.9" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="heyzap-cordova" version="1.2.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 
   <name>Heyzap</name>
   <description>Heyzap SDK for Apache Cordova/Adobe PhoneGap</description>
@@ -11,16 +11,15 @@
     <engine name="cordova-android" version=">=4.0.0" />
     <engine name="cordova-ios" version=">=3.8.0" />
   </engines>
-  
+
   <!-- Main Object -->
   <js-module src="www/ads/HeyzapAds.js" name="ads.HeyzapAds">
     <merges target="HeyzapAds" />
   </js-module>
   <!-- / Main Object -->
-  
+
   <!-- Plugin Client Side Code -->
   <js-module src="www/ads/InterstitialAd.js" name="ads.InterstitialAd"></js-module>
-  <js-module src="www/ads/VideoAd.js" name="ads.VideoAd"></js-module>
   <js-module src="www/ads/IncentivizedAd.js" name="ads.IncentivizedAd"></js-module>
   <js-module src="www/ads/BannerAd.js" name="ads.BannerAd"></js-module>
 
@@ -30,16 +29,16 @@
   <!-- Vendor -->
   <js-module src="www/vendor/es6-promise.min.js" name="vendor.PromisePolyfill"></js-module>
   <!-- / Vendor -->
-  
+
   <!-- / Plugin Client Side Code -->
 
   <!-- iOS -->
   <platform name="ios">
-    
+
     <!-- Hooks -->
     <hook type="before_plugin_install" src="hooks/before_plugin_install/000_create_symlinks.js" />
     <!-- / Hooks -->
-    
+
     <!-- Modify Cordova config -->
     <config-file target="config.xml" parent="/*">
       <feature name="HeyzapAds">
@@ -54,11 +53,6 @@
 
       <feature name="InterstitialAd">
         <param name="ios-package" value="CDVHZInterstitialAd"/>
-        <param name="onload" value="true" />
-      </feature>
-
-      <feature name="VideoAd">
-        <param name="ios-package" value="CDVHZVideoAd"/>
         <param name="onload" value="true" />
       </feature>
 
@@ -82,15 +76,17 @@
     <header-file src="src/ios/CDVHZInterstitialAd.h" />
     <source-file src="src/ios/CDVHZInterstitialAd.m" />
 
-    <header-file src="src/ios/CDVHZVideoAd.h" />
-    <source-file src="src/ios/CDVHZVideoAd.m" />
-
     <header-file src="src/ios/CDVHZBannerAd.h" />
     <source-file src="src/ios/CDVHZBannerAd.m" />
-    <!-- / Adapters -->
-    
+
+    <!-- Resources -->
+    <resource-file src="src/ios/sdk/Heyzap/Resources/FYBHZMediationTestSuiteStoryboard.storyboardc" />
+    <resource-file src="src/ios/sdk/Heyzap/Resources/FYBHZMediationTestSuiteStoryboard~ipad.storyboardc" />
+    <resource-file src="src/ios/sdk/Heyzap/Resources/FYBHZMediationTestSuiteStoryboard~iphone.storyboardc" />
+
     <!-- Heyzap SDK -->
     <framework src="src/ios/sdk/Heyzap/HeyzapAds.framework" custom="true" compiler-flags="-fmodules" />
+    <framework src="src/ios/sdk/Heyzap/FYBHZMediationTestSuiteEF.framework" custom="true" compiler-flags="-fmodules" />
     <!-- / Heyzap SDK -->
 
     <!-- External Frameworks -->
@@ -111,7 +107,7 @@
     <framework src="CoreLocation.framework"/>
 
     <framework src="libxml2.dylib"/>
-    <framework src="libsqlite3.dylib" /> 
+    <framework src="libsqlite3.dylib" />
     <!-- / External Frameworks -->
 
     <info>
@@ -122,7 +118,7 @@
 
   <!-- Android -->
   <platform name="android">
-    
+
     <!-- Modify Cordova config -->
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="HeyzapAds">
@@ -140,55 +136,22 @@
         <param name="onload" value="true" />
       </feature>
 
-      <feature name="VideoAd">
-        <param name="android-package" value="com.heyzap.cordova.ads.CDVVideoAd"/>
-        <param name="onload" value="true" />
-      </feature>
-
       <feature name="BannerAd">
         <param name="android-package" value="com.heyzap.cordova.ads.CDVBannerAd"/>
         <param name="onload" value="true" />
       </feature>
     </config-file>
-    <!-- / Modify Cordova config -->
 
-    <!-- Native app manifest -->
-    <config-file target="AndroidManifest.xml" parent="/*">
-      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-      <uses-permission android:name="android.permission.INTERNET" />
-    </config-file>
-    <!-- / Native app manifest -->
-    
-    <!-- Native app manifest - Application Tag -->
-    <config-file target="AndroidManifest.xml" parent="/manifest/application">
-      <activity android:name="com.heyzap.sdk.ads.HeyzapInterstitialActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
-      <activity android:name="com.heyzap.sdk.ads.HeyzapVideoActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
-      <activity android:name="com.heyzap.sdk.ads.HeyzapProxyActivity" />
-      <activity android:name="com.heyzap.sdk.ads.VASTActivity" />
-
-      <!-- Heyzap SDK Test Activity -->
-      <activity android:name="com.heyzap.sdk.ads.MediationTestActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
-      <!-- / Heyzap SDK Test Activity -->
-      
-      <receiver android:name="com.heyzap.sdk.ads.PackageAddedReceiver">
-        <intent-filter>
-          <data android:scheme="package"/>
-          <action android:name="android.intent.action.PACKAGE_ADDED"/>
-        </intent-filter>
-      </receiver>
-    </config-file>
-    <!-- / Native app manifest - Application Tag -->
-    
     <!-- Heyzap SDK -->
-    <source-file src="src/android/sdk/heyzap-ads-sdk.jar" target-dir="libs" />
+    <framework src="src/android/heyzap.gradle" custom="true" type="gradleReference" />
+    <source-file src="src/android/sdk/heyzap-unified-platform-10.0.10.aar" target-dir="libs" />
     <!-- / Heyzap SDK -->
-    
+
     <!-- Adapters -->
     <source-file src="src/android/com/heyzap/cordova/ads/CDVHeyzapAbstractPlugin.java" target-dir="src/com/heyzap/cordova/ads" />
     <source-file src="src/android/com/heyzap/cordova/ads/CDVHeyzapAds.java" target-dir="src/com/heyzap/cordova/ads" />
     <source-file src="src/android/com/heyzap/cordova/ads/CDVIncentivizedAd.java" target-dir="src/com/heyzap/cordova/ads" />
     <source-file src="src/android/com/heyzap/cordova/ads/CDVInterstitialAd.java" target-dir="src/com/heyzap/cordova/ads" />
-    <source-file src="src/android/com/heyzap/cordova/ads/CDVVideoAd.java" target-dir="src/com/heyzap/cordova/ads" />
     <source-file src="src/android/com/heyzap/cordova/ads/CDVBannerAd.java" target-dir="src/com/heyzap/cordova/ads" />
     <source-file src="src/android/com/heyzap/cordova/ads/CDVListener.java" target-dir="src/com/heyzap/cordova/ads" />
     <source-file src="src/android/com/heyzap/cordova/ads/ICDVHeyzapPlugin.java" target-dir="src/com/heyzap/cordova/ads" />
