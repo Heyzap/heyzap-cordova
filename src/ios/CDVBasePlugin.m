@@ -38,24 +38,24 @@
 
 - (UIViewController *)topMostViewController {
     UIViewController *topController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-    
+
     while ([topController presentedViewController]) {
         topController = [topController presentedViewController];
     }
-    
+
     return topController;
 }
 
 - (void)addEventListener:(CDVInvokedUrlCommand *)command {
-    
+
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:@[@"OK"]];
-    
+
     if (!self.listenerCallbackId) {
         self.listenerCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];
         [self addDelegate];
     }
-    
+
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
@@ -126,7 +126,7 @@ NSString *const WILL_LEAVE_APPLICATION = @"will_leave_application";
     if (tag == nil) {
       tag = @"default";
     }
-  
+
     [self dispatchCallback:FETCH_FAILED_CALLBACK withData:@[tag]];
 }
 
@@ -144,10 +144,18 @@ NSString *const COMPLETE_CALLBACK = @"complete";
 NSString *const INCOMPLETE_CALLBACK = @"incomplete";
 
 - (void) didCompleteAdWithTag: (NSString *)tag {
+    if (tag == nil) {
+      tag = @"default";
+    }
+
     [self dispatchCallback:COMPLETE_CALLBACK withData:@[tag]];
 }
 
 - (void) didFailToCompleteAdWithTag: (NSString *)tag {
+    if (tag == nil) {
+      tag = @"default";
+    }
+
     [self dispatchCallback:INCOMPLETE_CALLBACK withData:@[tag]];
 }
 
@@ -191,7 +199,7 @@ NSString *const LOADED_CALLBACK = @"loaded";
     NSMutableArray *mData = [NSMutableArray array];
     [mData insertObject:event atIndex:0];
     [mData addObjectsFromArray:data];
-    
+
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:mData];
     [result setKeepCallbackAsBool:YES];
     [self.commandDelegate sendPluginResult:result callbackId:self.listenerCallbackId];
