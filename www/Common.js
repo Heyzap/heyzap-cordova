@@ -26,7 +26,7 @@
 (function() {
   "use strict";
 
-  var Promise = require('heyzap-cordova.Promise');
+  var Promise = cordova.require('heyzap-cordova.Promise');
 
   var Common = {
     listeners: {},
