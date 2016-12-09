@@ -95,54 +95,54 @@ Callbacks
 You may need to know when an ad has shown, has been hidden, or the user clicked on an ad (and is about to leave your app). You can attach a listener to the object to receive callbacks for when these events occur:
 
 ```javascript
-HeyzapAds.VideoAd.addEventListener(HeyzapAds.VideoAd.Events.AUDIO_STARTED,
+HeyzapAds.InterstitialAd.addEventListener(HeyzapAds.VideoAd.Events.AUDIO_STARTED,
   function() {
     // Pause any music
   });
 ```
 
-`InterstitialAd`, `VideoAd` and `IncentivizedAd` define six different events:
+`InterstitialAd` and `IncentivizedAd` define six different events:
 
 ```javascript
-HeyzapAds.VideoAd.addEventListener(HeyzapAds.VideoAd.Events.SHOW,
+HeyzapAds.InterstitialAd.addEventListener(HeyzapAds.InterstitialAd.Events.SHOW,
   function(tag) {
     // The ad was successfully shown.
   });
 
-HeyzapAds.VideoAd.addEventListener(HeyzapAds.VideoAd.Events.HIDE,
+HeyzapAds.InterstitialAd.addEventListener(HeyzapAds.InterstitialAd.Events.HIDE,
   function(tag) {
     // The ad successfully finished showing and is now off the screen.
   });
 
-HeyzapAds.VideoAd.addEventListener(HeyzapAds.VideoAd.Events.CLICKED,
+HeyzapAds.InterstitialAd.addEventListener(HeyzapAds.InterstitialAd.Events.CLICKED,
   function(tag) {
     // The ad was clicked/tapped
     // The user might be switched to the browser or an app store.
   });
 
-HeyzapAds.VideoAd.addEventListener(HeyzapAds.VideoAd.Events.SHOW_FAILED,
+HeyzapAds.InterstitialAd.addEventListener(HeyzapAds.InterstitialAd.Events.SHOW_FAILED,
   function(tag, error) {
     // The ad could not be shown successfully.
   });
 
-HeyzapAds.VideoAd.addEventListener(HeyzapAds.VideoAd.Events.FETCH_FAILED,
+HeyzapAds.InterstitialAd.addEventListener(HeyzapAds.InterstitialAd.Events.FETCH_FAILED,
   function(tag, error) {
     // The ad could not be fetched.
   });
 
-HeyzapAds.VideoAd.addEventListener(HeyzapAds.VideoAd.Events.AUDIO_STARTED,
+HeyzapAds.InterstitialAd.addEventListener(HeyzapAds.InterstitialAd.Events.AUDIO_STARTED,
   function() {
     // The ad will start playing audio.
     // Mute any music in the background.
   });
 
-HeyzapAds.VideoAd.addEventListener(HeyzapAds.VideoAd.Events.AUDIO_FINISHED,
+HeyzapAds.InterstitialAd.addEventListener(HeyzapAds.InterstitialAd.Events.AUDIO_FINISHED,
   function(tag) {
     // The ad stop playing audio.
     // Resume any previously muted music.
   });
 
-HeyzapAds.VideoAd.addEventListener(HeyzapAds.VideoAd.Events.AVAILABLE,
+HeyzapAds.InterstitialAd.addEventListener(HeyzapAds.InterstitialAd.Events.AVAILABLE,
   function(tag) {
     // An ad is available for display.
   });
@@ -164,7 +164,7 @@ HeyzapAds.IncentivizedAd.addEventListener(HeyzapAds.IncentivizedAd.Events.INCOMP
 
 `BannerAd` has the following three callbacks
 ```javascript
-HeyzapAds.BannerAd.addEventListener(HeyzapAds.BannerAd.Events.LOADED,
+HeyzapAds.BannerAd.addEventListener(HeyzapAds.BannerAd.Events.AVAILABLE,
   function() {
     // The ad is loaded.
   });
