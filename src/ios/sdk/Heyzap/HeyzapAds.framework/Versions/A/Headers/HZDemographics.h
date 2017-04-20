@@ -15,8 +15,6 @@
  */
 @interface HZDemographics : NSObject
 
-+ (HZDemographics *)sharedDemographics;
-
 /**
  *  The user's current location.
  *

@@ -27,10 +27,8 @@ Step 2. Add your 3rd-party SDKs
 
 - **AppLovin**: Install the Heyzap's AppLovin Cordova wrapper plugin, run:
     ```
-    cordova plugin add https://github.com/Heyzap/heyzap-cordova-extras.git#:heyzap-cordova-applovin --variable APPLOVIN_ANDROID_SDK_KEY=**YOUR APPLOVIN SDK KEY HERE**
+    cordova plugin add https://github.com/Heyzap/heyzap-cordova-extras.git#:heyzap-cordova-applovin
     ```
-
-    *Note* If you are only using iOS, the plugin will still ask you to add the APPLOVIN_ANDROID_SDK_KEY value. In this case, provide whatever value you want as it won't affect your integration.
 
 - **Chartboost**: Install the Heyzap's Chartboost Cordova wrapper plugin, run:
     ```
@@ -44,6 +42,11 @@ Step 2. Add your 3rd-party SDKs
 
 - **iAd**: **Note: This network works in iOS only.** No extra integration is required for iAd on iOS.
 
+- **Leadbolt**: Install the Heyzap's Leadbolt Cordova wrapper plugin, run:
+    ```
+    cordova plugin add https://github.com/Heyzap/heyzap-cordova-extras.git#:heyzap-cordova-leadbolt
+    ```
+
 - **MdotM**: No extra integration is required for MdotM
 
 - **UnityAds**: Install the Heyzap's UnityAds Cordova wrapper plugin, run
@@ -56,10 +59,10 @@ Step 2. Add your 3rd-party SDKs
     cordova plugin add https://github.com/Heyzap/heyzap-cordova-extras.git#:heyzap-cordova-vungle
     ```
 
-If you haven't already, use our [Integration Wizard](https://developers.heyzap.com/integration_wizard)
+If you haven't already, use our [Integration Wizard](https://developers.heyzap.com/integration_wizard) 
 to setup the 3rd-party networks you want to use with mediation.
 
-**Note: The Heyzap SDK will automatically detect and initialize
+**Note: The Heyzap SDK will automatically detect and initialize 
 the SDKs from 3rd-party networks, therefore no code changes are required.**
 
 Step 3. Platform specific configurations
@@ -106,7 +109,7 @@ To use the Mediation Debug View, simply call `HeyzapAds.showMediationTestSuite()
 ```javascript
 document.addEventListener('deviceready', function() {
   HeyzapAds.start("<PUBLISHER_KEY>").then(function() {
-
+    
     return HeyzapAds.showMediationTestSuite(); // returns a Promise
 
   }, function(error) {
@@ -134,7 +137,32 @@ You do not have to call `fetch()` on Interstitial Ads, they are automatically fe
 ```javascript
 HeyzapAds.InterstitialAd.show().then(function() {
   // Native call successful.
+  
+}, function(error) {
+  // Handle Error
 
+});
+```
+
+#### Video Ads
+
+As early as possible, and after showing a video ad, call fetch: 
+```javascript
+HeyzapAds.VideoAd.fetch().then(function() {
+  // Native call successful.
+  
+}, function(error) {
+  // Handle Error
+
+});
+```
+
+Later, such as after a level is completed:
+```javascript
+HeyzapAds.VideoAd.show().then(function() {
+  // Native call successful.
+  return HeyzapAds.VideoAd.fetch();
+  
 }, function(error) {
   // Handle Error
 
@@ -143,11 +171,11 @@ HeyzapAds.InterstitialAd.show().then(function() {
 
 #### Rewarded Video Ads
 
-As early as possible, and after showing a rewarded video ad, call fetch:
+As early as possible, and after showing a rewarded video ad, call fetch: 
 ```javascript
 HeyzapAds.IncentivizedAd.fetch().then(function() {
   // Native call successful.
-
+  
 }, function(error) {
   // Handle Error
 
@@ -159,7 +187,7 @@ Later, such as after a level is completed:
 HeyzapAds.IncentivizedAd.show().then(function() {
   // Native call successful.
   return HeyzapAds.IncentivizedAd.fetch();
-
+  
 }, function(error) {
   // Handle Error
 
@@ -177,7 +205,7 @@ To show a banner you must specify a position (`HeyzapAds.BannerAd.POSITION_TOP` 
 ```javascript
 HeyzapAds.BannerAd.show(HeyzapAds.BannerAd.POSITION_TOP).then(function() {
   // Native call successful.
-
+  
 }, function(error) {
   // Handle Error
 
@@ -188,7 +216,7 @@ To hide a currently showing banner:
 ```javascript
 HeyzapAds.BannerAd.hide().then(function() {
   // Native call successful.
-
+  
 }, function(error) {
   // Handle Error
 
@@ -199,7 +227,7 @@ To completely remove a currently loaded banner:
 ```javascript
 HeyzapAds.BannerAd.destroy().then(function() {
   // Native call successful.
-
+  
 }, function(error) {
   // Handle Error
 

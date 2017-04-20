@@ -54,9 +54,8 @@ NSString *const HZ_FRAMEWORK = @"cordova";
             if (publisherID) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                  
                     [HeyzapAds startWithPublisherID:publisherID andOptions:options andFramework: HZ_FRAMEWORK];
-                  
+                    
                     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
                     [[weakSelf commandDelegate] sendPluginResult:result callbackId:command.callbackId];
                 });
@@ -67,7 +66,6 @@ NSString *const HZ_FRAMEWORK = @"cordova";
             }
         }
         @catch (NSException *e) {
-          
             CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:e.description];
             [[weakSelf commandDelegate] sendPluginResult:result callbackId:command.callbackId];
         }
@@ -80,18 +78,31 @@ NSString *const HZ_FRAMEWORK = @"cordova";
         __weak CDVHeyzapAds *weakSelf = self;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-          
             [HeyzapAds presentMediationDebugViewController];
-          
+            
             CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             [[weakSelf commandDelegate] sendPluginResult:result callbackId:command.callbackId];
         });
     }
     @catch (NSException *e) {
-      
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:e.description];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }
+}
+
+- (void)remoteData:(CDVInvokedUrlCommand *)command {
+    NSDictionary *data = [HeyzapAds remoteData];
+    
+    CDVPluginResult *result;
+    
+    if (data) {
+        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:data];
+        
+    } else {
+        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Unable to fetch remote data."];
+    }
+    
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
 - (void)onIAPComplete:(CDVInvokedUrlCommand *)command {
@@ -109,7 +120,6 @@ NSString *const HZ_FRAMEWORK = @"cordova";
     
     }
     @catch (NSException *e) {
-      
        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:e.description];
        [[weakSelf commandDelegate] sendPluginResult:result callbackId:command.callbackId];
     }
@@ -117,7 +127,9 @@ NSString *const HZ_FRAMEWORK = @"cordova";
 
 #pragma mark - Overriden Methods
 - (void)addDelegate {
-  //Unused
+    [HeyzapAds networkCallbackWithBlock:^(NSString *network, NSString *callback) {
+        [self networkCallback:network callback:callback];
+    }];
 }
 
 # pragma mark - Other
@@ -141,6 +153,7 @@ NSString *const HZ_FRAMEWORK = @"cordova";
                           @"none": @(HZAdOptionsNone),
                           @"disableAutomaticPrefetch": @(HZAdOptionsDisableAutoPrefetching),
                           @"installTrackingOnly": @(HZAdOptionsInstallTrackingOnly),
+                          @"amazon": @(HZAdOptionsAmazon),
                           @"disableMediation": @(HZAdOptionsDisableMedation),
                           @"disableAutomaticIAPRecording": @(HZAdOptionsDisableAutomaticIAPRecording)
                           };
