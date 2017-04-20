@@ -88,6 +88,11 @@ extern const CGSize HZHeyzapExchangeBannerSize480x75;
 /** The constant for a banner 728 points wide and 90 points high. */
 extern const CGSize HZHeyzapExchangeBannerSize728x90;
 
+/** The 320x50 size. This is the default for phones. */
+extern CGSize const HZMoPubBannerSize;
+/** The 728x90 size. This is the default for tablets. */
+extern CGSize const HZMoPubLeaderboardSize;
+
 @interface HZBannerAdOptions : NSObject <NSCopying>
 
 /**
@@ -119,9 +124,7 @@ extern const CGSize HZHeyzapExchangeBannerSize728x90;
  */
 @property (nonatomic) CGSize inMobiBannerSize;
 
-#pragma mark - iAd
-
-// iAd does not offer sizing options. Please refer to the `ADBannerView` documentation for information on ad sizes.
+@property (nonatomic) CGSize moPubBannerSize;
 
 /// @name Other Banner Options
 #pragma mark - Other Banner Options
