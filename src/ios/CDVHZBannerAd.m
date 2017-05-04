@@ -10,7 +10,7 @@
 
 @interface CDVHZBannerAd()
 
-@property (nonatomic, strong) UIView *currentBannerAd;
+@property (nonatomic, strong) HZBannerAd *currentBannerAd;
 @property (nonatomic, strong) NSString *currentBannerPosition;
 @property (nonatomic, strong) NSDictionary *bannerSizes;
 
@@ -32,6 +32,7 @@ NSString *const POSITION_BOTTOM = @"bottom";
     dispatch_async(dispatch_get_main_queue(), ^{
         
         @try {
+
             NSString *jsPosition = [command argumentAtIndex:0 withDefault:POSITION_BOTTOM andClass:[NSString class]];
             NSDictionary *jsOptions = [command argumentAtIndex:1 withDefault:nil andClass:[NSDictionary class]];
             NSString *tag = [command argumentAtIndex:2 withDefault:@"" andClass:[NSString class]];
@@ -50,7 +51,7 @@ NSString *const POSITION_BOTTOM = @"bottom";
                     [weakSelf setCurrentBannerPosition:nil];
                 }
             }
-
+            
             NSUInteger position = HZBannerPositionBottom;
             
             if ([jsPosition isEqualToString:POSITION_TOP]) {
@@ -59,23 +60,24 @@ NSString *const POSITION_BOTTOM = @"bottom";
             
             HZBannerAdOptions *options = [weakSelf bannerOptionsFromDictionary:jsOptions];
             options.tag = tag;
-          
-            [[HZBannerAdController sharedInstance] placeBannerAtPosition: position options: options success:^(UIView *banner) {
-                  [weakSelf setCurrentBannerAd:banner];
-                  [weakSelf setCurrentBannerPosition:jsPosition];
-                  [weakSelf addDelegate];
-                  [weakSelf bannerDidReceiveAd:[HZBannerAdController sharedInstance]];
-                  
-                  CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-                  [[weakSelf commandDelegate] sendPluginResult:result callbackId:command.callbackId];
-                  
+            
+            [HZBannerAd placeBannerInView:nil position:position options:options success:^(HZBannerAd *banner) {
+                [weakSelf setCurrentBannerAd:banner];
+                [weakSelf setCurrentBannerPosition:jsPosition];
+                [weakSelf addDelegate];
+                [weakSelf bannerDidReceiveAd:banner];
+                
+                CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                [[weakSelf commandDelegate] sendPluginResult:result callbackId:command.callbackId];
+                
             } failure:^(NSError *error) {
-                  NSLog(@"Could not load banner. Error = %@", error);
-                  
-                  CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error description]];
-                  [[weakSelf commandDelegate] sendPluginResult:result callbackId:command.callbackId];
-                  
+                NSLog(@"Could not load banner. Error = %@", error);
+                
+                CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error description]];
+                [[weakSelf commandDelegate] sendPluginResult:result callbackId:command.callbackId];
+                
             }];
+            
         }
         @catch (NSException *e) {
             CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:e.description];
@@ -90,7 +92,7 @@ NSString *const POSITION_BOTTOM = @"bottom";
     __weak CDVHZBannerAd *weakSelf = self;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-
+        
         @try {
             if (![weakSelf currentBannerAd] || [[weakSelf currentBannerAd] isHidden]) {
                 CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"There is no banner ad currently showing."];
@@ -122,7 +124,7 @@ NSString *const POSITION_BOTTOM = @"bottom";
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
                 
             } else {
-                [[HZBannerAdController sharedInstance] destroyBanner];
+                [[weakSelf currentBannerAd] removeFromSuperview];
                 [weakSelf setCurrentBannerAd:nil];
                 [weakSelf setCurrentBannerPosition:nil];
                 
@@ -150,9 +152,9 @@ NSString *const POSITION_BOTTOM = @"bottom";
                                          @"width": @0,
                                          @"height": @0
                                          }];
-          
+            
             if ([weakSelf currentBannerAd]) {
-
+                
                 // for converting from points to pixels
                 CGFloat scale = [[UIScreen mainScreen] scale];
                 CGRect frame = [[weakSelf currentBannerAd] frame];
@@ -162,7 +164,7 @@ NSString *const POSITION_BOTTOM = @"bottom";
                 dimensions[@"width"] = @(frame.size.width * scale);
                 dimensions[@"height"] = @(frame.size.height * scale);
             }
-
+            
             CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dimensions];
             [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         }
@@ -176,8 +178,7 @@ NSString *const POSITION_BOTTOM = @"bottom";
 #pragma mark - Overriden Methods
 
 - (void)addDelegate {
-  
-    [[HZBannerAdController sharedInstance] setDelegate:self];
+    [self.currentBannerAd setDelegate:self];
 }
 
 #pragma mark - Other
@@ -188,7 +189,7 @@ NSString *const ADMOB_SIZE_SMART = @"SMART";
 
 - (HZBannerAdOptions *)bannerOptionsFromDictionary:(NSDictionary *)jsOptions {
     HZBannerAdOptions *options = [[HZBannerAdOptions alloc] init];
-
+    
     if (jsOptions) {
         
         NSString *jsFacebookBannerSize = [jsOptions objectForKey:FACEBOOK_SIZE_PROPERTY];

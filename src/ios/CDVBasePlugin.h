@@ -31,6 +31,7 @@
 - (void)addEventListener:(CDVInvokedUrlCommand *)command;
 - (void)addDelegate;
 
+- (void)networkCallback:(NSString *)network callback:(NSString *)callback;
 - (UIViewController *)topMostViewController;
 
 @end
