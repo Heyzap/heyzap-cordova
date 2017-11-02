@@ -106,12 +106,12 @@
     <framework src="Social.framework"/>
     <framework src="StoreKit.framework"/>
     <framework src="SystemConfiguration.framework"/>
-    <framework src="iAd.framework"/>
     <framework src="MessageUI.framework"/>
     <framework src="CoreLocation.framework"/>
+    <framework src="WebKit.framework"/>
 
-    <framework src="libxml2.dylib"/>
-    <framework src="libsqlite3.dylib" /> 
+    <framework src="libxml2.tbd"/>
+    <framework src="libsqlite3.tbd" /> 
     <!-- / External Frameworks -->
 
     <info>
