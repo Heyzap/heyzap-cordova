@@ -133,7 +133,7 @@
    */
   var BannerAd = {
     Events: {
-      LOADED: 'loaded',
+      AVAILABLE: 'available',
       ERROR: 'error',
       CLICKED: 'clicked'
     },
