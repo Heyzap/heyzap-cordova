@@ -33,7 +33,7 @@
   }
 
   if (!Promise) {
-    Promise = require('heyzap-cordova.vendor.PromisePolyfill').Promise;
+    Promise = cordova.require('heyzap-cordova.vendor.PromisePolyfill').Promise;
   }
 
   module.exports = Promise;
